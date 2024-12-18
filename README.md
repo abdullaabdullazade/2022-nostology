@@ -8,3 +8,4 @@
 
 
 # o vaxt maxi yazanmırdım. Onu yazmağa 1 ay sərf elədim. Yadımdadır @tugayabdulla ilə yazmağa çalışmağımız. join funksiyasını onda 2021 idi. count.py 2022də yazmışam. Ömrümdən 24 saat alıb tam-tamına.
+# Gpt olmayan vaxtlar :(. bu kodlar iyunda yazılıb 2022'nin.
