@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: lightsalmon;
+            margin-left: 400px;
+            margin-top:100px
+        }
+
+        div {
+            width: 500px;
+            height: 230px;
+            background-color: aliceblue;
+            font-family: 'molonas', cursive;
+            border: 3px solid;
+            border-radius: 30px;
+            text-align: center;
+
+        }
+
+        #player {
+            color: blue
+        }
+
+        #computer {
+            color: red;
+        }
+
+        button {
+            font-family: 'molonas', cursive;
+            width: 100px;
+            font-size: 17px;
+        }
+
+        #print {
+            margin-left: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2 id="player">Player:</h2>
+        <h2 id="computer">Computer:</h2>
+        <h2 id="result">Result:</h2>
+        <button id="rock" onclick="rock()">ROCK</button>
+        <button id="paper" onclick="paper()">PAPER</button>
+        <button id="scissors" onclick="scissors()">SCISSORS</button>
+    </div><br><br>
+    <button id="print">Print</button>
+    <script>
+        document.getElementById('print').addEventListener('click',()=>window.print())
+        function computerchoosing() {
+            let choosings = ['ROCK', 'PAPER', 'SCISSORS']
+            let random = Math.floor(Math.random() * 3)
+            return choosings[random]
+        }
+        function main(id) {
+            let player = document.getElementById('player')
+            let computer = document.getElementById('computer')
+            let result = document.getElementById('result')
+            player.textContent = 'Player: ' + id.toUpperCase()
+            computer.textContent = 'Computer: ' + computerchoosing()
+            function findresult() {
+                if ((player.textContent.slice(8) == 'PAPER' && computer.textContent.slice(10) == 'ROCK') || (player.textContent.slice(8) == 'SCISSORS' && computer.textContent.slice(10) == 'PAPER') || (player.textContent.slice(8) == 'ROCK' && computer.textContent.slice(10) == 'SCISSORS')) {
+                    result.textContent = 'You win!'
+                } else if (player.textContent.slice(8) == computer.textContent.slice(10)) {
+                    result.textContent = 'Draw!'
+
+                } else {
+                    result.textContent = 'You lost'
+                }
+                result.style.color = 'red'
+            }
+            findresult()
+        }
+        function rock() {
+            main('rock')
+        }
+        function paper() {
+            main('paper')
+        }
+        function scissors() {
+            main('scissors')
+        }
+
+    </script>
+</body>
+
+</html>

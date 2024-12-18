@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My to do List</title>
+    <style>
+        body {
+            background-color: lightblue;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        #motherdiv {
+            margin-left: 500px;
+            width: 600px;
+            height: 200px;
+            border: 1px solid;
+            background-color: rgba(0, 128, 0, 0.5);
+        }
+
+        #title {
+            text-align: center;
+        }
+
+        #input-1 {
+            height: 25px;
+            width: 450px;
+            margin-left: 5px;
+
+
+        }
+
+        #add {
+            height: 31px;
+            width: 50px;
+            background-color: violet;
+            border: 1px solid;
+        }
+
+        #forul {
+            border: 1px solid;
+            margin-left: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+            height: 110px;
+        }
+
+        ul {
+            list-style: none;
+
+
+        }
+
+        h4 {
+            display: inline;
+            cursor: pointer;
+        }
+
+        ul button {
+            display: inline;
+            float: right;
+            background-color: lightsalmon;
+            border: 1px solid;
+        }
+
+        ul div {
+            height: 30px;
+        }
+
+        ul button:hover {
+            background-color: lightpink;
+        }
+
+        #deletealllist {
+            width: 75px;
+            height: 30px;
+            font-size: 14px;
+        }
+
+        #deletealllist:hover {
+            background-color: crimson;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="motherdiv">
+        <h3 id="title">My to do list</h3>
+        <input type="text" id="input-1" placeholder="Title....">
+        <button id="add" onclick="add()">Add</button>
+        <button id="deletealllist" onclick="deletealllist()">DeleteList</button>
+
+        <div id="forul">
+            <ul id="motherul">
+                <div id="div-1">
+                    <li>
+
+                        <h4 onclick="main('div-1')">Learn new task</h4>
+                        <button onclick="delete_('div-1')">X</button>
+
+                    </li>
+                </div><br>
+                <div id="div-2">
+                    <li>
+                        <h4 onclick="main('div-2')">Read book</h4>
+                        <button onclick="delete_('div-2')">X</button>
+                    </li>
+                </div><br>
+            </ul>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('keydown', event => {
+            if (event.key.toLowerCase() == 'enter') {
+                add()
+            } else if (event.key.toLowerCase() == 'delete') {
+                deletealllist()
+            }
+
+
+
+
+
+        })
+        let heightmotherdiv = 200
+        let heightuldiv = 110
+        let id_ = 3
+        function main(id) {
+            document.getElementById(id).querySelector('h4').style.textDecoration = 'line-through'
+            document.getElementById(id).style.backgroundColor = 'lightblue'
+        }
+        function delete_(id) {
+            let answer = confirm(`Do you want delete ${document.getElementById(id).querySelector('h4').textContent}`)
+            if (answer == true) {
+                document.getElementById('motherul').removeChild(document.getElementById(id).nextElementSibling)
+                document.getElementById('motherul').removeChild(document.getElementById(id))
+                heightmotherdiv -= 50
+                heightuldiv -= 50
+                document.getElementById('motherdiv').style.height = heightmotherdiv + 'px'
+                document.getElementById('forul').style.height = heightuldiv + 'px'
+
+            }
+        }
+        function add() {
+            if (document.getElementById('input-1').value==''){
+                alert('Input must not be empty!')
+            }else{
+            heightmotherdiv += 50
+            heightuldiv += 50
+            document.getElementById('motherdiv').style.height = heightmotherdiv + 'px'
+            document.getElementById('forul').style.height = heightuldiv + 'px'
+            let creatediv = document.createElement('div')
+            let createli = document.createElement('li')
+            let createh4 = '<h4 onclick=main("div-' + id_ + '"' + ')>' + document.getElementById("input-1").value + '</h4>'
+            let createbutton = '<button  onclick=delete_("div-' + id_ + '"' + ')>X</button>'
+            creatediv.id = 'div-' + id_
+            document.getElementById('motherul').appendChild(creatediv)
+            document.getElementById('div-' + id_).innerHTML += createh4
+            document.getElementById('div-' + id_).innerHTML += createbutton
+            document.getElementById('motherul').innerHTML += '<br>'
+            id_++
+            document.getElementById('input-1').value = ''
+            }
+
+
+
+        }
+        function deletealllist() {
+            let confirm_ = confirm('Do you want delete all list?')
+            if (confirm_) {
+                for (let i = 0; i < document.querySelector('ul').querySelectorAll('div').length; i++) {
+                    heightmotherdiv -= 45
+                    heightuldiv -= 45
+
+                }
+                document.getElementById('motherdiv').style.height = heightmotherdiv + 'px'
+                document.getElementById('forul').style.height = heightuldiv + 'px'
+                document.querySelector('ul').innerHTML = ''
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>
