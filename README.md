@@ -1,6 +1,6 @@
 # 2022-nostology
 
-# 2022 dəki whatsappda @tugayabdulla'a atdığım kodları tapdım. hahahha
+# 2022 dəki whatsappda @tugayabdulla'a testing üçün atdığım kodları tapdım. hahahha
 
 # Atamın whatsappdan kodları götürdüm indi atıram bura.
 
