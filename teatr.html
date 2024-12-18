@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teatr</title>
+    <style>
+        * {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+        }
+
+        body {
+            background-image: url('teatr2.png');
+            background-size: 1368px;
+            font-family: sans-serif;
+        }
+
+        #div-1 {
+            width: 700px;
+            height: 450px;
+            background-color: white;
+            opacity: 0.9;
+            margin-left: 340px;
+            margin-top: 24px;
+            border-radius: 4px;
+        }
+
+        #nav-1 {
+            height: 80px;
+            background-image: url('window.png');
+        }
+
+        #movietime {
+            text-align: center;
+            color: white;
+        }
+
+        h5 {
+            text-align: center;
+            color: white;
+        }
+
+        h2 {
+            margin-left: 30px;
+        }
+
+        h4 {
+            display: inline;
+        }
+
+        button {
+            background-color: rgba(255, 0, 0, 0.9);
+            border-radius: 8px;
+            opacity: 0.8;
+            border: 0px;
+            display: inline;
+            float:right;
+        }
+
+        button:hover {
+            background-color: red;
+            opacity: 1;
+        }
+
+        li {
+            cursor: pointer;
+            margin-left: 15px;
+            list-style: none;
+            padding-top: 10px;
+
+        }
+
+        #input {
+            border: 1px solid;
+            width: 220px;
+            height: 24px;
+            margin-left: 250px;
+            margin-top: 10px;
+
+        }
+
+        #addbutton {
+            height: 26px;
+            background-color: green;
+            border: 1px solid;
+            border-radius: 4px;
+            float: none;
+        }
+
+
+
+        ul div {
+            width: 600px;
+            height: 40px;
+            border-left: 3px solid rgba(128, 128, 128, 0.3);
+
+        }
+
+        ul div:hover {
+            border-left: 3px solid violet;
+
+        }
+
+        #returnback {
+            height: 25px;
+            background-color: blue;
+            color: lightpink;
+            opacity: 0.9;
+            border: 1px solid;
+            float: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div-1">
+        <nav id="nav-1">
+            <h2 id="movietime">Movie Time</h2>
+            <h5>A Curated list of Most Amazing Movies!</h5>
+        </nav>
+        <h2>Movies to Watch</h2>
+        <ul id="motherul">
+            <div id="button1">
+                <li>
+                    <h4>The Intern</h4>
+                    <button onclick="main('button1')">Delete</button>
+                </li>
+            </div><br>
+            <div id="button2">
+                <li>
+                    <h4>Inception</h4>
+                    <button onclick="main('button2')">Delete</button>
+                </li>
+            </div><br>
+            <div id="button3">
+                <li>
+                    <h4>The Prestige</h4>
+                    <button onclick="main('button3')">Delete</button>
+                </li>
+            </div><br>
+            <div id="button4">
+                <li>
+                    <h4>The Wolf of Wall Street</h4>
+                    <button onclick="main('button4')">Delete</button>
+                </li>
+            </div><br>
+
+        </ul>
+        <input type="text" name="" id="input" placeholder="Enter a new movie...">
+        <button id="addbutton" onclick="add()">Add</button>
+        <button id="returnback" onclick="returnback()">Return Back</button>
+    </div>
+
+    <script>
+        let id_ = 0
+        let buttoncheck = 4
+        let height = 450
+        let str = ''
+        let key
+        window.addEventListener('keydown',event=>{
+            if (event.key=='Enter'){
+                add()
+            }
+            else if (event.key.toLowerCase()=='b'){
+                if (key=='r'){
+                    returnback()
+                }
+            }
+            key=event.key.toLowerCase()
+
+            
+
+        })
+        function add() {
+            let addbutton = document.getElementById('addbutton')
+            let input = document.getElementById('input')
+            let createli = document.createElement('li')
+            let creatediv = document.createElement('div')
+            buttoncheck += 1
+            id_ += 1
+            if (input.value == '') {
+                alert('Input must not be empty')
+            }
+            else {
+
+                createli.id = 'li' + id_
+                creatediv.id = 'div' + id_
+                document.getElementById('motherul').append(creatediv)
+                document.getElementById('div' + id_).append(createli)
+                let h4 = document.createElement('h4')
+                h4.textContent = `${document.getElementById('input').value} `
+                h4.id = 'h4' + id_
+                let createbutton = `<button id="button${buttoncheck}" onclick=main('div${id_}')>Delete</button>`
+                document.getElementById('motherul').innerHTML += '<br>'
+                document.getElementById('li' + id_).append(h4)
+                document.getElementById('li' + id_).innerHTML += createbutton
+                height += 60
+                document.getElementById('div-1').style.height = height + 'px'
+                document.getElementById('input').value = ''
+
+
+
+            }
+
+        }
+        function main(id) {
+            let confirm_ = confirm(`Do you delete this "${document.getElementById(id).querySelector('h4').textContent}"`)
+            if (confirm_ == true) {
+                str = document.body.innerHTML
+                document.getElementById('motherul').removeChild(document.getElementById(id).nextElementSibling)
+                document.getElementById('motherul').removeChild(document.getElementById(id))
+                height -= 60
+                document.getElementById('div-1').style.height = height + 'px'
+            } else {
+                alert(`${document.getElementById(id).querySelector('h4').textContent} was not cleared`)
+            }
+        }
+        function returnback() {
+            if (str == "") {
+                alert('No film name')
+            } else {
+                document.body.innerHTML = str
+                height += 60
+                document.getElementById('div-1').style.height = height + 'px'
+                str = ""
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
